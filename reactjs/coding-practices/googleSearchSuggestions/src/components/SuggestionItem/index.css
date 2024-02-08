@@ -1,0 +1,30 @@
+/* Write your CSS here */
+li {
+  /* border: 1px solid black; */
+  width: 95%;
+  list-style-type: none;
+  margin: 0rem 1rem;
+  font-size: medium;
+  display: flex;
+  align-items: center;
+}
+
+li p {
+  /* border: 1px solid red; */
+  width: 95%;
+}
+li p:hover {
+  /* border: 1px solid red; */
+  width: 95%;
+  cursor: pointer;
+}
+
+li img {
+  /* border: 1px solid red; */
+  width: 20px;
+  height: 20px;
+}
+
+li img:hover {
+  cursor: pointer;
+}

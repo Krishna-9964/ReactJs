@@ -1,0 +1,36 @@
+/* Write your CSS here */
+.app-container {
+  background-color: #382f5a;
+  width: 40%;
+  /* padding: 0.3rem; */
+}
+.profile-icon {
+  height: 70px;
+  width: 70px;
+  background-color: #c7d2fe;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #7c3aed;
+}
+
+.profile {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.user-name {
+  color: #d4d2db;
+}
+
+.balance {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.denominations button:hover {
+  cursor: pointer;
+}
