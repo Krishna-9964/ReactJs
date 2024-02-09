@@ -1,1 +1,108 @@
 /* Write your CSS here */
+.container > * {
+  font-family: 'Roboto';
+}
+
+.container {
+  height: 100vh;
+  width: 100vw;
+  /* border: 1px solid black; */
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  background-image: linear-gradient(to right, #defafe, #cffcf1);
+}
+
+.main-container {
+  width: 60%;
+  height: 85%;
+  /* border: 1px solid black; */
+  display: flex;
+}
+
+.timer {
+  width: 75%;
+  /* border: 1px solid black; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1em;
+  background-image: url('https://assets.ccbp.in/frontend/react-js/digital-timer-elapsed-bg.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: none;
+}
+
+.time h1 {
+  color: #00d9f5;
+}
+
+.time p {
+  font-weight: 700;
+}
+
+.time {
+  background-color: #defafe;
+  padding: 4rem;
+  border-radius: 50%;
+}
+
+/* controls */
+
+.controls {
+  /* border: 1px solid #00d9f5; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.controls .info {
+  font-size: small;
+  font-weight: 700;
+}
+.controls-1 {
+  /* border: 1px solid red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.controls-1 img {
+  margin-right: 0.3rem;
+  height: 2rem;
+  width: 2rem;
+}
+.controls-1 button,
+.timer-limit button {
+  background: none;
+  border: none;
+  outline: none;
+  font-size: large;
+  font-weight: 700;
+}
+.controls-1 .start-pause,
+.controls-1 .reset {
+  margin: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timer-limit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timer-limit > * {
+  margin: 0.4rem;
+}
+
+.timer-limit p {
+  background-image: linear-gradient(to right, #2cfc03, #00d9f5);
+  padding: 0.3rem 1rem;
+  border-radius: 0.3rem;
+}

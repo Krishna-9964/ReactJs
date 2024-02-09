@@ -3,7 +3,22 @@ import {Component} from 'react'
 import './index.css'
 
 class DigitalTimer extends Component {
-  state = {second: 0, minute: 25, isTimerRunning: false}
+  state = {
+    second: 0,
+    minute: 25,
+    isTimerRunning: false,
+    isButtonDisabled: false,
+    modifiedMinute: 25,
+  }
+
+  componentDidMount = () => {
+    const {modifiedMinute} = this.state
+    this.setState({minute: modifiedMinute})
+  }
+
+  componentWillUnmount = () => {
+    clearInterval(this.timerId)
+  }
 
   updateSeconds = () => {
     const {minute, second} = this.state
@@ -17,41 +32,30 @@ class DigitalTimer extends Component {
     if (minute === 0 && second === 0) {
       clearInterval(this.timerId)
       this.setState({isTimerRunning: false, second: 0})
-    }
-  }
-
-  reduceMinute = () => {
-    const {isTimerRunning} = this.state
-    if (isTimerRunning === false) {
-      this.setState(prevState => ({
-        minute: prevState.minute > 0 ? prevState.minute - 1 : prevState.minute,
-      }))
-    }
-  }
-
-  increaseMinute = () => {
-    const {isTimerRunning} = this.state
-    if (isTimerRunning === false) {
-      this.setState(prevState => ({
-        minute: prevState.minute + 1,
-      }))
+      this.resetTimer()
     }
   }
 
   startTimer = () => {
     this.timerId = setInterval(this.updateSeconds, 1000)
-    this.setState({isTimerRunning: true})
+    this.setState({isTimerRunning: true, isButtonDisabled: true})
   }
 
   pauseTimer = () => {
     console.log(this.timerId)
     clearInterval(this.timerId)
-    this.setState({isTimerRunning: false})
+    this.setState({isTimerRunning: false, isButtonDisabled: true})
   }
 
   resetTimer = () => {
     clearInterval(this.timerId)
-    this.setState({isTimerRunning: false, minute: 25, second: 0})
+    this.setState({
+      isTimerRunning: false,
+      minute: 25,
+      second: 0,
+      isButtonDisabled: false,
+      modifiedMinute: 25,
+    })
   }
 
   getTimer = () => {
@@ -61,15 +65,33 @@ class DigitalTimer extends Component {
     return `${min}:${sec}`
   }
 
+  addMoreMinute = () => {
+    this.setState(prevState => ({
+      modifiedMinute: prevState.modifiedMinute + 1,
+      minute: prevState.modifiedMinute + 1,
+    }))
+  }
+
+  reduceMoreMinute = () => {
+    const {modifiedMinute} = this.state
+    if (modifiedMinute > 0)
+      this.setState(prevState => ({
+        modifiedMinute: prevState.modifiedMinute - 1,
+        minute: prevState.modifiedMinute - 1,
+      }))
+  }
+
   render() {
-    const {minute, isTimerRunning} = this.state
+    const {modifiedMinute, isTimerRunning, isButtonDisabled} = this.state
     return (
       <div className="container">
         <h1>Digital Timer</h1>
         <div className="main-container">
           <div className="timer">
-            <h1>{this.getTimer()}</h1>
-            <p>{isTimerRunning ? 'Running' : 'Paused'}</p>
+            <div className="time">
+              <h1>{this.getTimer()}</h1>
+              <p>{isTimerRunning ? 'Running' : 'Paused'}</p>
+            </div>
           </div>
           <div className="controls">
             <div className="controls-1">
@@ -84,6 +106,7 @@ class DigitalTimer extends Component {
                   onClick={isTimerRunning ? this.pauseTimer : this.startTimer}
                 />
                 <button
+                  type="button"
                   onClick={isTimerRunning ? this.pauseTimer : this.startTimer}
                 >
                   {isTimerRunning ? 'Pause' : 'Start'}
@@ -95,15 +118,29 @@ class DigitalTimer extends Component {
                   alt="reset icon"
                   onClick={this.resetTimer}
                 />
-                <button onClick={this.resetTimer}>Reset</button>
+                <button type="button" onClick={this.resetTimer}>
+                  Reset
+                </button>
               </div>
             </div>
 
-            <p>Set Timer Limit</p>
+            <p className="info">Set Timer Limit</p>
             <div className="timer-limit">
-              <button onClick={this.reduceMinute}>-</button>
-              <p>{minute}</p>
-              <button onClick={this.increaseMinute}>+</button>
+              <button
+                type="button"
+                onClick={this.reduceMoreMinute}
+                disabled={isButtonDisabled}
+              >
+                -
+              </button>
+              <p>{modifiedMinute}</p>
+              <button
+                type="button"
+                onClick={this.addMoreMinute}
+                disabled={isButtonDisabled}
+              >
+                +
+              </button>
             </div>
           </div>
         </div>
